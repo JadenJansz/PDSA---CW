@@ -4,8 +4,6 @@
  */
 package com.mycompany.pdsa.cw.Game2;
 
-import com.mycompany.pdsa.cw.HomeScreen;
-
 /**
  *
  * @author jaden
@@ -31,7 +29,6 @@ public class Menu extends javax.swing.JFrame {
         encode_btn = new javax.swing.JButton();
         decode_btn = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        btn_back2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -54,13 +51,6 @@ public class Menu extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel1.setText("Menu");
 
-        btn_back2.setText("Back");
-        btn_back2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_back2ActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -68,24 +58,20 @@ public class Menu extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(btn_back2)
-                        .addGap(97, 97, 97)
+                        .addGap(178, 178, 178)
                         .addComponent(jLabel1))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(150, 150, 150)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(decode_btn, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(encode_btn, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(147, Short.MAX_VALUE))
+                .addContainerGap(177, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
-                    .addComponent(btn_back2))
+                .addComponent(jLabel1)
                 .addGap(54, 54, 54)
                 .addComponent(encode_btn, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(37, 37, 37)
@@ -108,12 +94,6 @@ public class Menu extends javax.swing.JFrame {
         d.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_decode_btnActionPerformed
-
-    private void btn_back2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_back2ActionPerformed
-        HomeScreen home = new HomeScreen();
-        home.setVisible(rootPaneCheckingEnabled);
-        dispose();
-    }//GEN-LAST:event_btn_back2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -151,7 +131,6 @@ public class Menu extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btn_back2;
     private javax.swing.JButton decode_btn;
     private javax.swing.JButton encode_btn;
     private javax.swing.JLabel jLabel1;

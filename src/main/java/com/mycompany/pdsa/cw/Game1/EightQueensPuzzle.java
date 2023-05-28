@@ -61,40 +61,40 @@ public class EightQueensPuzzle extends JFrame{
         }
     }
 
-private void handleButtonClick(int row, int col) {
-    if (!board[row][col]) {
-        placeQueen(row, col);
-    } else {
-        removeQueen(row, col);
+    private void handleButtonClick(int row, int col) {
+        if (!board[row][col]) {
+            placeQueen(row, col);
+        } else {
+            removeQueen(row, col);
+        }
+        if (isSolutionCorrect(board)) {
+            System.out.println("Correct Solution!");
+            // Solution is correct
+            // Display the "Your answer is correct!" message
+            JOptionPane.showMessageDialog(this, "Your answer is correct!");
+            checkDuplicateAnswer(board);
+        }
     }
-    if (isSolutionCorrect(board)) {
-        System.out.println("Correct Solution!");
-        // Solution is correct
-        // Display the "Your answer is correct!" message
-        JOptionPane.showMessageDialog(this, "Your answer is correct!");
-        checkDuplicateAnswer(board);
+
+    public void placeQueen(int row, int col) {
+        if (isSafeToPlace(row, col)) {
+            board[row][col] = true;
+            boardButtons[row][col].setText("Q");
+        } else {
+            JOptionPane.showMessageDialog(this, "Invalid move! Queens cannot attack each other.");
+        }
     }
-}
 
-private void placeQueen(int row, int col) {
-    if (isSafeToPlace(row, col)) {
-        board[row][col] = true;
-        boardButtons[row][col].setText("Q");
-    } else {
-        JOptionPane.showMessageDialog(this, "Invalid move! Queens cannot attack each other.");
+
+    public void removeQueen(int row, int col) {
+        if (board[row][col]) {
+            board[row][col] = false;
+            boardButtons[row][col].setText("");
+        }
     }
-}
 
 
-private void removeQueen(int row, int col) {
-    if (board[row][col]) {
-        board[row][col] = false;
-        boardButtons[row][col].setText("");
-    }
-}
-
-
-    private boolean isSafeToPlace(int row, int col) {
+    public boolean isSafeToPlace(int row, int col) {
         // Check row and column
         for (int i = 0; i < BOARD_SIZE; i++) {
             if (board[row][i] || board[i][col]) {
@@ -106,7 +106,7 @@ private void removeQueen(int row, int col) {
             return true;
     }
 
-private boolean isSolutionCorrect(boolean[][] board) {
+public boolean isSolutionCorrect(boolean[][] board) {
     int queensCount = 0;
     // Check each row for exactly one queen
     for (int row = 0; row < BOARD_SIZE; row++) {
@@ -148,7 +148,6 @@ private boolean isDiagonalSafe(boolean[][] board, int row, int col) {
     // Check upper left diagonal
     for (int i = row, j = col; i >= 0 && j >= 0; i--, j--) {
             if (board[i][j]) {
-            System.out.println("Hello1");
             return false;
         }
     }
@@ -156,7 +155,6 @@ private boolean isDiagonalSafe(boolean[][] board, int row, int col) {
     // Check lower left diagonal
     for (int i = row, j = col; i < BOARD_SIZE && j >= 0; i++, j--) {
         if (board[i][j]) {
-            System.out.println("Hello2");
             return false;
         }
     }
@@ -164,7 +162,6 @@ private boolean isDiagonalSafe(boolean[][] board, int row, int col) {
     // Check upper right diagonal
     for (int i = row, j = col; i >= 0 && j < BOARD_SIZE; i--, j++) {
         if (board[i][j]) {
-            System.out.println("Hello3");
             return false;
         }
     }
@@ -178,7 +175,7 @@ private boolean isDiagonalSafe(boolean[][] board, int row, int col) {
     return true;
 }
 
-private String convertBoardToString(boolean[][] board) {
+public String convertBoardToString(boolean[][] board) {
     StringBuilder sb = new StringBuilder();
     for (int row = 0; row < BOARD_SIZE; row++) {
         for (int col = 0; col < BOARD_SIZE; col++) {
@@ -193,19 +190,40 @@ private String convertBoardToString(boolean[][] board) {
     return sb.toString();
 }
 
-private void saveSolutionToDatabase(boolean[][] board) {
+private void saveSolutionToDatabase(boolean[][] board, int id) {
+        int totalRows = 0;
         if (isSolutionCorrect(board)) {
             try {
                 Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/game1?zeroDateTimeBehavior=CONVERT_TO_NULL", "root", "");
 
-                String sql = "INSERT INTO solutions (board_state) VALUES (?)";
+                
+                
+                String sql = "UPDATE solutions set identified = true WHERE id = ?";
                 PreparedStatement statement = connection.prepareStatement(sql);
 
                 String boardState = convertBoardToString(board);
 
-                statement.setString(1, boardState);
+                statement.setInt(1, id);
                 statement.executeUpdate();
                 statement.close();
+                
+                String checkFlags = "SELECT COUNT(*) AS rows FROM soulutions WHERE identified = 'true' ";
+                PreparedStatement statement1 = connection.prepareStatement(checkFlags);
+                ResultSet resultSet = statement1.executeQuery();
+                
+                if (resultSet.next()) {
+                    totalRows = resultSet.getInt("rows");
+                    
+                }
+                
+                if(totalRows == 10){
+                    JOptionPane.showMessageDialog(this, "All solutions are identified");
+                    sql = "UPDATE solutions set identified = false";
+                    statement = connection.prepareStatement(sql);
+                    statement.executeUpdate();
+                    statement.close();
+                }
+                
                 connection.close();
             } catch (SQLException e) {
                 e.printStackTrace();
@@ -223,24 +241,24 @@ private void checkDuplicateAnswer(boolean[][] board) {
         // Connect to the database
         Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/game1?zeroDateTimeBehavior=CONVERT_TO_NULL", "root", "");
 
-        String sql = "SELECT board_state FROM solutions";
+        String sql = "SELECT id,board_state, identified FROM solutions WHERE board_state = ?";
         PreparedStatement statement = connection.prepareStatement(sql);
+        statement.setString(1, boardState);
 
         ResultSet resultSet = statement.executeQuery();
         if(!resultSet.next()){
-             saveSolutionToDatabase(board);
+            System.out.println(boardState);
         }
         
         else{
         do {
-                if (boardState.equals(resultSet.getString("board_state"))) {
-                    System.out.println("lol");
-                    JOptionPane.showMessageDialog(this, "This answer is already saved in the database.");
+                if (resultSet.getBoolean("identified") == true) {
+                    JOptionPane.showMessageDialog(this, "This answer is already identified");
                     return;
                 } else {
                     System.out.println(boardState);
                     System.out.println(resultSet.getString("board_state"));
-                    saveSolutionToDatabase(board);
+                    saveSolutionToDatabase(board, resultSet.getInt("id"));
                     return;
                 }
             } while (resultSet.next()); 
@@ -255,6 +273,13 @@ private void checkDuplicateAnswer(boolean[][] board) {
     }
 }
 
+    public boolean[][] getBoard() {
+        return board;
+    }
+
+    public void setBoard(boolean[][] board) {
+        this.board = board;
+    }
 
 public static void main(String[] args) {
     SwingUtilities.invokeLater(new Runnable() {

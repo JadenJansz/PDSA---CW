@@ -4,7 +4,6 @@
  */
 package com.mycompany.pdsa.cw.Game2;
 
-import com.mycompany.pdsa.cw.Game2.HuffmanGame.Node;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.Random;
@@ -19,6 +18,10 @@ public class Encode extends javax.swing.JFrame {
     /**
      * Creates new form Encode
      */
+    private String randomString;
+    private String encodedString;
+    private static final int MAX_STRING_LENGTH = 30;
+    private static final String CHARACTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
     public Encode() {
         initComponents();
         submit_btn.setEnabled(false);
@@ -29,9 +32,6 @@ public class Encode extends javax.swing.JFrame {
             }
         });
     }
-    private static final int MAX_STRING_LENGTH = 30;
-    private static final String CHARACTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-    private static Node huffmanTreeRoot;
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -42,15 +42,40 @@ public class Encode extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        submit_btn = new javax.swing.JButton();
-        back_btn = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         txtbox_en = new javax.swing.JTextField();
-        lbl_output = new javax.swing.JLabel();
         lbl_ranString = new javax.swing.JLabel();
         reload_btn = new javax.swing.JButton();
+        submit_btn = new javax.swing.JButton();
+        back_btn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        jLabel2.setText("Random String");
+
+        txtbox_en.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtbox_enActionPerformed(evt);
+            }
+        });
+        txtbox_en.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtbox_enKeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtbox_enKeyReleased(evt);
+            }
+        });
+
+        lbl_ranString.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+
+        reload_btn.setText("Reload");
+        reload_btn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                reload_btnActionPerformed(evt);
+            }
+        });
 
         submit_btn.setText("Submit");
         submit_btn.addActionListener(new java.awt.event.ActionListener() {
@@ -66,45 +91,32 @@ public class Encode extends javax.swing.JFrame {
             }
         });
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
-        jLabel2.setText("Random String");
-
-        lbl_output.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        lbl_output.setText("     ");
-
-        lbl_ranString.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-
-        reload_btn.setText("Reload");
-        reload_btn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                reload_btnActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(lbl_output, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(118, 118, 118))
-            .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(28, 28, 28)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel2)
-                            .addComponent(txtbox_en, javax.swing.GroupLayout.DEFAULT_SIZE, 419, Short.MAX_VALUE)
-                            .addComponent(lbl_ranString, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addGroup(layout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(back_btn))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(110, 110, 110)
-                        .addComponent(reload_btn)
-                        .addGap(87, 87, 87)
-                        .addComponent(submit_btn)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lbl_ranString, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txtbox_en, javax.swing.GroupLayout.Alignment.TRAILING)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(back_btn))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addGap(256, 256, 256)
+                                .addComponent(reload_btn)
+                                .addGap(103, 103, 103)
+                                .addComponent(submit_btn)))
+                        .addGap(0, 397, Short.MAX_VALUE)))
+                .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel2)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -112,41 +124,22 @@ public class Encode extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(back_btn)
-                .addGap(15, 15, 15)
+                .addGap(21, 21, 21)
                 .addComponent(jLabel2)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(lbl_ranString, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(36, 36, 36)
                 .addComponent(txtbox_en, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lbl_output)
-                .addGap(18, 18, 18)
+                .addGap(50, 50, 50)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(reload_btn)
                     .addComponent(submit_btn))
-                .addContainerGap(64, Short.MAX_VALUE))
+                .addContainerGap(40, Short.MAX_VALUE))
         );
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void submit_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submit_btnActionPerformed
-        String randomString =lbl_ranString.getText();
-
-        HuffmanGame hf = new HuffmanGame();
-        String answer = txtbox_en.getText();
-        boolean isCorrect = hf.validateAnswer(randomString, answer);
-        System.out.println(isCorrect ? "Correct!" : "Wrong answer.");
-        JOptionPane.showMessageDialog(null, isCorrect ? "Correct!" : "Wrong answer.", "Error",JOptionPane.INFORMATION_MESSAGE);
-        lbl_output.setText(isCorrect ? "Correct!" : "Wrong answer.");
-    }//GEN-LAST:event_submit_btnActionPerformed
-
-    private void back_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_back_btnActionPerformed
-        Menu m = new Menu();
-        m.setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_back_btnActionPerformed
 
     private void reload_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reload_btnActionPerformed
         Random random = new Random();
@@ -160,12 +153,41 @@ public class Encode extends javax.swing.JFrame {
 
         HuffmanGame h = new HuffmanGame();
 
-        String randomString = sb.toString();
-        String encodedString = h.encodeString(sb.toString());
+        randomString = sb.toString();
+        encodedString = h.encodeString(sb.toString());
+
         System.out.println("Random String: " + randomString);
         System.out.println("Encoded String: " + encodedString);
+
         lbl_ranString.setText(randomString);
     }//GEN-LAST:event_reload_btnActionPerformed
+
+    private void submit_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submit_btnActionPerformed
+        String answer = txtbox_en.getText();
+
+        boolean isCorrect = encodedString.equals(answer);
+
+        System.out.println(isCorrect ? "Correct!" : "Wrong answer.");
+        JOptionPane.showMessageDialog(null, isCorrect ? "Correct!" : "Wrong answer.", "Result",JOptionPane.INFORMATION_MESSAGE);
+    }//GEN-LAST:event_submit_btnActionPerformed
+
+    private void back_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_back_btnActionPerformed
+        Menu m = new Menu();
+        m.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_back_btnActionPerformed
+
+    private void txtbox_enActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtbox_enActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtbox_enActionPerformed
+
+    private void txtbox_enKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtbox_enKeyPressed
+        
+    }//GEN-LAST:event_txtbox_enKeyPressed
+
+    private void txtbox_enKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtbox_enKeyReleased
+        Validator.validateBinary(txtbox_en);
+    }//GEN-LAST:event_txtbox_enKeyReleased
 
     /**
      * @param args the command line arguments
@@ -205,7 +227,6 @@ public class Encode extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton back_btn;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel lbl_output;
     private javax.swing.JLabel lbl_ranString;
     private javax.swing.JButton reload_btn;
     private javax.swing.JButton submit_btn;
