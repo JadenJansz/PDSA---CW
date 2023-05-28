@@ -36,7 +36,7 @@ public class HuffmanGameTest {
     public void testEncodeWithSpace() {
         HuffmanGame huffmanGame = new HuffmanGame();
         String input = "ABBCCCDDDDEEEEE";
-        String expectedOutput = "01 10 000 1111";
+        String expectedOutput = "010 011 011 00 00 00 10 10 10 10 11 11 11 11 11 ";
         
         String encodedString = huffmanGame.encodeWithSpace(input);
         

@@ -52,6 +52,7 @@ public class HuffmanGame {
         }
         System.out.print("LLLLLLLLLLLLLLLL " +input);
         System.out.print("LLLLLLLLLLLLLLLL " +sb.toString());
+        
         return sb.toString();
     }
 

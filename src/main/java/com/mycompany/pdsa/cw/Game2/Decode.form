@@ -51,11 +51,6 @@
               <EmptySpace max="-2" attributes="0"/>
           </Group>
           <Group type="102" alignment="1" attributes="0">
-              <EmptySpace max="32767" attributes="0"/>
-              <Component id="lbl_output2" min="-2" pref="98" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="401" max="-2" attributes="0"/>
-          </Group>
-          <Group type="102" alignment="1" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Component id="lbl_ranString2" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
@@ -77,9 +72,7 @@
               <Component id="lbl_lookup" min="-2" pref="25" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="txtbox_de" min="-2" max="-2" attributes="0"/>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Component id="lbl_output2" min="-2" max="-2" attributes="0"/>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="52" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="reload_btn" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="Submit_btn" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -94,14 +87,6 @@
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Segoe UI" size="12" style="1"/>
-        </Property>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="lbl_output2">
-      <Properties>
-        <Property name="text" type="java.lang.String" value=" "/>
-        <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-          <Color id="Default Cursor"/>
         </Property>
       </Properties>
     </Component>

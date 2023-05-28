@@ -207,12 +207,12 @@ private void saveSolutionToDatabase(boolean[][] board, int id) {
                 statement.executeUpdate();
                 statement.close();
                 
-                String checkFlags = "SELECT COUNT(*) AS rows FROM soulutions WHERE identified = 'true' ";
+                String checkFlags = "SELECT COUNT(*) AS total_rows FROM solutions WHERE identified = true ";
                 PreparedStatement statement1 = connection.prepareStatement(checkFlags);
                 ResultSet resultSet = statement1.executeQuery();
                 
                 if (resultSet.next()) {
-                    totalRows = resultSet.getInt("rows");
+                    totalRows = resultSet.getInt("total_rows");
                     
                 }
                 

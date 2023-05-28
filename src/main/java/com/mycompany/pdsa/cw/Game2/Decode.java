@@ -44,7 +44,6 @@ public class Decode extends javax.swing.JFrame {
     private void initComponents() {
 
         lbl_ranString2 = new javax.swing.JLabel();
-        lbl_output2 = new javax.swing.JLabel();
         txtbox_de = new javax.swing.JTextField();
         Submit_btn = new javax.swing.JButton();
         reload_btn = new javax.swing.JButton();
@@ -56,9 +55,6 @@ public class Decode extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         lbl_ranString2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-
-        lbl_output2.setText(" ");
-        lbl_output2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         txtbox_de.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
@@ -119,10 +115,6 @@ public class Decode extends javax.swing.JFrame {
                     .addComponent(lbl_lookup, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(lbl_output2, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(401, 401, 401))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(lbl_ranString2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
@@ -142,9 +134,7 @@ public class Decode extends javax.swing.JFrame {
                 .addComponent(lbl_lookup, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtbox_de, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(lbl_output2)
-                .addGap(18, 18, 18)
+                .addGap(52, 52, 52)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(reload_btn)
                     .addComponent(Submit_btn))
@@ -162,7 +152,6 @@ public class Decode extends javax.swing.JFrame {
 
         JOptionPane.showMessageDialog(null, isMatch ? "Correct!" : "Wrong answer.", "Result",JOptionPane.INFORMATION_MESSAGE);
         System.out.println(isMatch ? "Correct!" : "Wrong answer.");
-        lbl_output2.setText(isMatch ? "Correct!" : "Wrong answer.");
     }//GEN-LAST:event_Submit_btnActionPerformed
 
     private void reload_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reload_btnActionPerformed
@@ -242,7 +231,6 @@ public class Decode extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel lbl_lookup;
-    private javax.swing.JLabel lbl_output2;
     private javax.swing.JLabel lbl_ranString2;
     private javax.swing.JButton reload_btn;
     private javax.swing.JTextField txtbox_de;

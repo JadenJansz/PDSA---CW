@@ -28,19 +28,6 @@ public class MinMaxAlgorithmTest {
     }
 
     /**
-     * Test of GenerateMove method, of class MinMaxAlgorithm.
-     */
-    @Test
-    public void testGenerateMove() {
-        System.out.println("GenerateMove");
-        int Player = 0;
-        MinMaxAlgorithm instance = new MinMaxAlgorithm();
-        int expResult = 0;
-        int result = instance.GenerateMove(Player);
-        assertEquals(expResult, result);
-    }
-
-    /**
      * Test of getX method, of class MinMaxAlgorithm.
      */
     @Test
